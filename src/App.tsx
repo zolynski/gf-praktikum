@@ -1,26 +1,32 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 
-function App() {
+import exampleData from './data/sample.json';
+import {Header} from "./components/header/header";
+import {Content} from "./components/content/content";
+import {ExampleData, ExampleData_questions_stream_latestByTag_questions} from "./react-app-env";
+
+/**
+ * Type alias for generated question type.
+ */
+type Question = ExampleData_questions_stream_latestByTag_questions;
+
+/**
+ * List of 100 example questions including answers and comments.
+ */
+const questions: Question[] = ((exampleData as unknown) as ExampleData).questions.stream.latestByTag.questions;
+
+/**
+ * Component showing a list of questions
+ */
+export const Listing: React.FunctionComponent = () => {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header/>
+      <Content>
+        Füll mich mit Inhalt!<br/>
+        Anzahl an Fragen: {questions.length}
+      </Content>
     </div>
   );
 }
-
-export default App;
